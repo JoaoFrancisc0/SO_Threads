@@ -1,6 +1,6 @@
 public class Pagina {
     private boolean referenciada;
-    private boolean presenca;
+    private boolean presenca;       //False -> Memoria Swap // True -> Memoria Fisica//
     private int posicao;
     private int valor;
 
