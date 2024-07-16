@@ -2,7 +2,7 @@ public class Memoria {
     int X = 20;
     private Pagina[] memoria_V = new Pagina[X];
 
-    public char read(int posicao) {
+    public int read(int posicao) {
         if (memoria_V[posicao].isPresenca()) {
             memoria_V[posicao].setReferenciada(true);
             return memoria_V[posicao].getValor();
@@ -11,7 +11,7 @@ public class Memoria {
         return memoria_V[posicao].getValor();
     }
 
-    public void write(int posicao, char valor) {
+    public void write(int posicao, int valor) {
         if (memoria_V[posicao] == null) {
             memoria_V[posicao] = new Pagina(true, true, posicao, valor);
         }

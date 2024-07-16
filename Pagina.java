@@ -2,9 +2,9 @@ public class Pagina {
     private boolean referenciada;
     private boolean presenca;
     private int posicao;
-    private char valor;
+    private int valor;
 
-    public Pagina(boolean referenciada, boolean presenca, int posicao, char valor) {
+    public Pagina(boolean referenciada, boolean presenca, int posicao, int valor) {
         this.referenciada = referenciada;
         this.presenca = presenca;
         this.posicao = posicao;
@@ -29,10 +29,10 @@ public class Pagina {
     public void setPosicao(int posicao) {
         this.posicao = posicao;
     }
-    public char getValor() {
+    public int getValor() {
         return valor;
     }
-    public void setValor(char valor) {
+    public void setValor(int valor) {
         this.valor = valor;
     }
 

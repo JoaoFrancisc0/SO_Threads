@@ -1,25 +1,23 @@
 public class Operacoes extends Thread {
-    private String listaOp;
+    private String[] listaOp;
     private Memoria memoria;
 
-    public Operacoes(String listaOp, Memoria memoria) {
-        this.listaOp = listaOp.substring(1, listaOp.length() - 1);
+    public Operacoes(String[] listaOp, Memoria memoria) {
+        this.listaOp = listaOp;
         this.memoria = memoria;
     }
 
     public void run() {
-        System.out.println(listaOp);
-        String[] array = listaOp.split(",");
-
-        for (String string : array) {
-            if (string.length() == 5) {
-                char valor = string.charAt(string.length() - 1);
-                int posicao = Integer.parseInt(string.substring(0, string.length() - 4));
+        for (String string : listaOp) {
+            String[] operacoes = string.split("-");
+            if (operacoes.length == 3) {
+                int posicao = Integer.parseInt(operacoes[0]);
+                int valor = Integer.parseInt(operacoes[2]);
                 memoria.write(posicao, valor);
                 System.out.println("Escrito");
             }
             else {
-                int posicao = Integer.parseInt(string.substring(0, string.length() - 2));
+                int posicao = Integer.parseInt(operacoes[0]);
                 System.out.println(memoria.read(posicao));
             }
         }
