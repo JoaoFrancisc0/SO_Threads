@@ -87,7 +87,8 @@ public class Memoria {
         for (Pagina pagina : memoria_V) {
             // Caso isPresenca = True -> esta na memoria fisica
             // e irá para o disco
-            if(pagina.isPresenca()) {
+            if (pagina == null);
+            else if(pagina.isPresenca()) {
                 temp = memoria_V[cont].getPosicao();
                 memoria_F[temp] = null;
                 memoria_V[cont].setPresenca(false);

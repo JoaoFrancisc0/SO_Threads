@@ -9,7 +9,8 @@ public class App {
         
         Operacoes thread_1 = new Operacoes(listaOp_1, memoria);
         Operacoes thread_2 = new Operacoes(listaOp_2, memoria);
-        
+
+        clock.start();
         thread_1.start();
         thread_2.start();
     }
