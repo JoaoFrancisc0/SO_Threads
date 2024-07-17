@@ -13,12 +13,12 @@ public class Operacoes extends Thread {
             if (operacoes.length == 3) {
                 int posicao = Integer.parseInt(operacoes[0]);
                 int valor = Integer.parseInt(operacoes[2]);
-                memoria.write(posicao, valor);
+                memoria.write(posicao - 1, valor);
                 System.out.println("Escrito");
             }
             else {
                 int posicao = Integer.parseInt(operacoes[0]);
-                int temp = memoria.read(posicao);
+                int temp = memoria.read(posicao - 1);
                 if (temp != -1)
                 System.out.println(temp);
             }
