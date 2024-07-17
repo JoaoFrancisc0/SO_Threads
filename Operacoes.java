@@ -18,7 +18,9 @@ public class Operacoes extends Thread {
             }
             else {
                 int posicao = Integer.parseInt(operacoes[0]);
-                System.out.println(memoria.read(posicao));
+                int temp = memoria.read(posicao);
+                if (temp != -1)
+                System.out.println(temp);
             }
         }
     }
