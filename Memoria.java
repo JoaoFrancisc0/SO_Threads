@@ -1,5 +1,6 @@
 public class Memoria {
     private int fisicaLivre;
+    private int temp;
 
     private Pagina[] memoria_V;
     private Pagina[] memoria_F;
@@ -23,6 +24,7 @@ public class Memoria {
                 // Buscando local na memoria fisica para ocupar
                 fisicaLivre = relogio(posicao);
                 memoria_D[posicao].setReferenciada(true);
+                memoria_D[posicao].setPresenca(true);
                 memoria_F[fisicaLivre] = memoria_D[posicao];
                 memoria_D[posicao] = null;
                 memoria_F[fisicaLivre].setPosicao(fisicaLivre);
@@ -65,7 +67,10 @@ public class Memoria {
                 // Caso a pagina esteja no estado não referenciado
                 // Passa para o disco
                 else if(!pagina.isReferenciada()) {
+                    // posicao -> indice em memoria virtual
+                    // cont -> indice em memoria fisica
                     memoria_F[cont].setPresenca(false);
+                    memoria_F[cont].setPosicao(-1);
                     memoria_D[posicao] = memoria_F[cont];
                     memoria_F[cont] = null;
                     break;
@@ -74,6 +79,21 @@ public class Memoria {
             }
             // Cont será a posição da memoria fisica que está livre
             return cont;
+        }
+    }
+
+    public void ordenador() {
+        int cont = 0;
+        for (Pagina pagina : memoria_V) {
+            // Caso isPresenca = True -> esta na memoria fisica
+            // e irá para o disco
+            if(pagina.isPresenca()) {
+                temp = memoria_V[cont].getPosicao();
+                memoria_F[temp] = null;
+                memoria_V[cont].setPresenca(false);
+                memoria_D[cont] = memoria_V[cont];
+            }
+            cont++;
         }
     }
 }
