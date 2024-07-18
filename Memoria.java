@@ -33,7 +33,6 @@ public class Memoria {
             }
         }
         else {
-            System.out.println("Posição na memória virtual vazia");
             return -1;
         }
     }
@@ -55,13 +54,17 @@ public class Memoria {
         }
     }
 
+    // Retorna o index da memoria fisica que esta livre
+    // E caso tenha alguma pagina com referenciada = false mesmo estando na memoria fisica, passa para a de disco
     public int relogio(int posicao) {
         int cont = 0;
+        boolean verificador = false;
         // Buscando local na memoria fisica para ocupar
         while(true){
             for (Pagina pagina : memoria_F) {
                 // Caso a pagina esteja vazia
                 if (pagina == null) {
+                    verificador = true;
                     break;
                 }
                 // Caso a pagina esteja no estado não referenciado
@@ -73,28 +76,24 @@ public class Memoria {
                     memoria_F[cont].setPosicao(-1);
                     memoria_D[posicao] = memoria_F[cont];
                     memoria_F[cont] = null;
+                    verificador = true;
                     break;
                 }
                 cont++;
             }
             // Cont será a posição da memoria fisica que está livre
-            return cont;
+            if (verificador) {
+                return cont;
+            }
         }
     }
 
-    public void ordenador() {
-        int cont = 0;
-        for (Pagina pagina : memoria_V) {
-            // Caso isPresenca = True -> esta na memoria fisica
-            // e irá para o disco
-            if (pagina == null);
-            else if(pagina.isPresenca()) {
-                temp = memoria_V[cont].getPosicao();
-                memoria_F[temp] = null;
-                memoria_V[cont].setPresenca(false);
-                memoria_D[cont] = memoria_V[cont];
+    // Percorre memoria F e passa referenciada para false
+    public void tick() {
+        for (Pagina pagina : memoria_F) {
+            if(pagina != null) {
+                pagina.setReferenciada(false);
             }
-            cont++;
         }
     }
 }

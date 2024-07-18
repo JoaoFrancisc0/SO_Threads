@@ -19,8 +19,13 @@ public class Operacoes extends Thread {
             else {
                 int posicao = Integer.parseInt(operacoes[0]);
                 int temp = memoria.read(posicao - 1);
-                if (temp != -1)
-                System.out.println(temp);
+                if (temp != -1){
+                    System.out.println(temp);
+                }
+                else {
+                    System.out.println("Posição na memória virtual vazia");
+                }
+
             }
         }
     }

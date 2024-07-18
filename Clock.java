@@ -8,7 +8,7 @@ public class Clock extends Thread {
     public void run() {
         try {
             while(true) {
-                memoria.ordenador();
+                memoria.tick();
 
                 Thread.sleep(5000);
             }
