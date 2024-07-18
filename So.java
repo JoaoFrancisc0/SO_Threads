@@ -1,4 +1,4 @@
-public class App {
+public class So {
     public static void main(String[] args) {
         String[] listaOp_1 = {"20-W-1","2-R","1-W-555","5-R"};
         String[] listaOp_2 = {"1-R","2-R","1-R","1-R"};
