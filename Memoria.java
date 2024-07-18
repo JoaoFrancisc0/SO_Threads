@@ -12,7 +12,7 @@ public class Memoria {
         this.memoria_D = new Pagina[tamanho];
     }
 
-    public synchronized int read(int posicao) {
+    public int read(int posicao) {
         if (memoria_V[posicao] != null) {
             // Caso true, esta página está na memória física
             if (memoria_V[posicao].isPresenca()) {
@@ -38,7 +38,7 @@ public class Memoria {
         }
     }
 
-    public synchronized void write(int posicao, int valor) {
+    public void write(int posicao, int valor) {
         // Caso o espaço da memoria virtual esteja livre
         if(memoria_V[posicao] == null) {
             fisicaLivre = relogio(posicao);
@@ -55,7 +55,7 @@ public class Memoria {
         }
     }
 
-    public synchronized int relogio(int posicao) {
+    public int relogio(int posicao) {
         int cont = 0;
         // Buscando local na memoria fisica para ocupar
         while(true){
