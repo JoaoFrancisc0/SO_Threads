@@ -1,10 +1,12 @@
 public class Operacoes extends Thread {
     private String[] listaOp;
     private Memoria memoria;
+    private int id;
 
-    public Operacoes(String[] listaOp, Memoria memoria) {
+    public Operacoes(String[] listaOp, Memoria memoria, int id) {
         this.listaOp = listaOp;
         this.memoria = memoria;
+        this.id = id;
     }
 
     public void run() {
@@ -13,12 +15,12 @@ public class Operacoes extends Thread {
             if (operacoes.length == 3) {
                 int posicao = Integer.parseInt(operacoes[0]);
                 int valor = Integer.parseInt(operacoes[2]);
-                memoria.write(posicao - 1, valor);
+                memoria.write(posicao - 1, valor, id);
                 System.out.println("Escrito");
             }
             else {
                 int posicao = Integer.parseInt(operacoes[0]);
-                int temp = memoria.read(posicao - 1);
+                int temp = memoria.read(posicao - 1, id);
                 if (temp != -1){
                     System.out.println(temp);
                 }

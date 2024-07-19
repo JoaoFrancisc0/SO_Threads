@@ -1,18 +1,25 @@
+import java.util.Arrays;
+
 public class Memoria {
     private int fisicaLivre;
-    private int temp;
-
     private Pagina[] memoria_V;
     private Pagina[] memoria_F;
     private Pagina[] memoria_D;
+    private int tamanho;
 
     public Memoria(int tamanho) {
         this.memoria_V = new Pagina[tamanho];
         this.memoria_F = new Pagina[tamanho/2];
         this.memoria_D = new Pagina[tamanho];
+        Arrays.fill(memoria_V, null);
+        Arrays.fill(memoria_F, null);
+        Arrays.fill(memoria_D, null);
+        this.tamanho = tamanho;
     }
 
-    public int read(int posicao) {
+    public int read(int posicao, int id) {
+        posicao = divisor(posicao, id);
+        
         if (memoria_V[posicao] != null) {
             // Caso true, esta página está na memória física
             if (memoria_V[posicao].isPresenca()) {
@@ -37,7 +44,9 @@ public class Memoria {
         }
     }
 
-    public void write(int posicao, int valor) {
+    public void write(int posicao, int valor, int id) {
+        posicao = divisor(posicao, id);
+
         // Caso o espaço da memoria virtual esteja livre
         if(memoria_V[posicao] == null) {
             fisicaLivre = relogio(posicao);
@@ -95,5 +104,15 @@ public class Memoria {
                 pagina.setReferenciada(false);
             }
         }
+    }
+
+    // Algoritmo que "divide" as memorias
+    public int divisor(int posicao, int id) {
+        if (id == 1)
+            posicao = posicao % (tamanho/2);
+        else
+            if(posicao < (tamanho/2))
+                posicao += tamanho/2;
+        return posicao;
     }
 }
