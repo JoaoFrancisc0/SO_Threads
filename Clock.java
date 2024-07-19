@@ -1,14 +1,14 @@
 public class Clock extends Thread {
-    private Memoria memoria;
+    private ClockInterface clockInterface;
 
-    public Clock(Memoria memoria) {
-        this.memoria = memoria;
+    public Clock(ClockInterface clockInterface) {
+        this.clockInterface = clockInterface;
     }
 
     public void run() {
         try {
             while(true) {
-                memoria.tick();
+                clockInterface.tick();
 
                 Thread.sleep(5000);
             }

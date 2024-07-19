@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class Memoria {
+public class Memoria implements ClockInterface {
     private int fisicaLivre;
     private Pagina[] memoria_V;
     private Pagina[] memoria_F;
