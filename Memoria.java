@@ -32,11 +32,13 @@ public class Memoria implements ClockInterface {
                 fisicaLivre = relogio(posicao);
                 memoria_D[posicao].setReferenciada(true);
                 memoria_D[posicao].setPresenca(true);
+                // Depois de modificar na memoria de disco passa para a fisica e entao remove da de disco
                 memoria_F[fisicaLivre] = memoria_D[posicao];
                 memoria_D[posicao] = null;
                 memoria_F[fisicaLivre].setPosicao(fisicaLivre);
-                posicao = memoria_V[posicao].getPosicao();
-                return memoria_F[posicao].getValor();
+                // Passa a versão atualizada para a virtual
+                memoria_V[posicao] = memoria_F[fisicaLivre];
+                return memoria_F[fisicaLivre].getValor();
             }
         }
         else {
@@ -85,6 +87,7 @@ public class Memoria implements ClockInterface {
                     memoria_F[cont].setPosicao(-1);
                     memoria_D[posicao] = memoria_F[cont];
                     memoria_F[cont] = null;
+                    memoria_V[posicao] = memoria_D[posicao];
                     verificador = true;
                     break;
                 }
@@ -99,8 +102,8 @@ public class Memoria implements ClockInterface {
 
     // Percorre memoria F e passa referenciada para false
     public void tick() {
-        for (Pagina pagina : memoria_F) {
-            if(pagina != null) {
+        for (Pagina pagina : memoria_V) {
+            if(pagina != null && pagina.isPresenca()) {
                 pagina.setReferenciada(false);
             }
         }
