@@ -2,11 +2,13 @@ public class Processo extends Thread {
     private String[] listaOp;
     private Memoria memoria;
     private int id;
+    private int tempoSleep;
 
-    public Processo(String[] listaOp, Memoria memoria, int id) {
+    public Processo(String[] listaOp, Memoria memoria, int id, int tempoSleep) {
         this.listaOp = listaOp;
         this.memoria = memoria;
         this.id = id;
+        this.tempoSleep = tempoSleep;
     }
 
     public void run() {
@@ -28,6 +30,11 @@ public class Processo extends Thread {
                     System.out.println("Posição na memória virtual vazia");
                 }
 
+            }
+            try {
+                sleep(tempoSleep);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
