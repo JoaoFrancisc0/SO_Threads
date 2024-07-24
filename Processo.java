@@ -1,9 +1,9 @@
-public class Operacoes extends Thread {
+public class Processo extends Thread {
     private String[] listaOp;
     private Memoria memoria;
     private int id;
 
-    public Operacoes(String[] listaOp, Memoria memoria, int id) {
+    public Processo(String[] listaOp, Memoria memoria, int id) {
         this.listaOp = listaOp;
         this.memoria = memoria;
         this.id = id;

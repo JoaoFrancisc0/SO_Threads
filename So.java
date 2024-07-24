@@ -6,11 +6,11 @@ public class So {
         Memoria memoria = new Memoria(20);
         
         Clock clock = new Clock(memoria);
-        
-        Operacoes thread_1 = new Operacoes(listaOp_1, memoria, 1);
-        Operacoes thread_2 = new Operacoes(listaOp_2, memoria, 2);
-
         clock.start();
+        
+        Processo thread_1 = new Processo(listaOp_1, memoria, 1);
+        Processo thread_2 = new Processo(listaOp_2, memoria, 2);
+
         thread_1.start();
         thread_2.start();
     }
